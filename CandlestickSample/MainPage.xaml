@@ -41,7 +41,7 @@
             </HorizontalStackLayout>
         </VerticalStackLayout>
 
-        <chart:SfCartesianChart Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,0,15,10" Background="WhiteSmoke">
+        <chart:SfCartesianChart Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,0,15,10" Background="White">
             <chart:SfCartesianChart.XAxes>
                 <chart:DateTimeAxis x:Name="xAxis"
                                     ShowTrackballLabel="True" 
@@ -77,5 +77,4 @@
             </chart:SfCartesianChart.ZoomPanBehavior>
         </chart:SfCartesianChart>
     </Grid>
-
 </ContentPage>
