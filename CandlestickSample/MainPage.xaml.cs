@@ -7,13 +7,6 @@ namespace CandlestickSample
         public MainPage()
         {
             InitializeComponent();
-
-            //trackball.LabelStyle = new ChartLabelStyle
-            //{
-            //    LabelFormat = "0.00",
-            //    Background = Colors.Black,
-            //    TextColor = Colors.White
-            //};
         }
 
        
