@@ -18,17 +18,17 @@
             <ColumnDefinition Width="auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <HorizontalStackLayout>
-        <Image Source="tesla.png" WidthRequest="60" HeightRequest="60" Margin="{OnPlatform Android='5,-20,0,0',Default='5,-80,0,0'}" Grid.Row="0" Grid.Column="0"></Image>
+        <Image Source="tesla.png" WidthRequest="60" HeightRequest="60" Margin="{OnPlatform Android='5,-20,0,0',iOS='5,-22,0,0',Default='5,-80,0,0'}" Grid.Row="0" Grid.Column="0"></Image>
             <VerticalStackLayout Grid.Row="0" Grid.Column="1">
-                <Label Text="{OnPlatform Android='Tesla,Inc.(TSLA)',Default='TSLA'}" FontSize="Medium" FontAttributes="Bold"></Label>
+                <Label Text="{OnPlatform Android='Tesla,Inc.(TSLA)',Default='TSLA'}" FontSize="Medium" FontAttributes="Bold" Margin="{OnPlatform iOS='0,5,0,0'}"></Label>
                 <Label Text="Analysis of Tesla(TSLA) Stock Prices" FontSize="Default" Margin="{OnPlatform Android='0,15,0,0',Default='0,5,0,0'}"></Label>
             <HorizontalStackLayout Margin="{OnPlatform Android='0,0,0,0',Default='0,10,0,0'}">
                     <Button x:Name="Label1" Text="Day" Background="Transparent" TextColor="Black" CornerRadius="5" Clicked="DayRange_Changed"></Button>
                     <Button x:Name="Label2" Text="Week" Background="Transparent" TextColor="Black" CornerRadius="5" Clicked="WeekRange_Changed"></Button>
                     <Button x:Name="Label3" Text="Month" Background="Transparent" TextColor="Black" CornerRadius="5" Clicked="MonthRange_Changed"></Button>
                     <Button x:Name="Label4" Text="Year" Background="Transparent" TextColor="Black" CornerRadius="5" Clicked="YearRange_Changed"></Button>
-                    <CheckBox HorizontalOptions="End" Margin="{OnPlatform Android='300,0,0,0',Default='700,0,0,0'}" x:Name="CheckBox" IsChecked="True"></CheckBox>
-                    <Label Text="Enable SolidCandles" Margin="0,10,0,0" HorizontalOptions="End"></Label>
+                    <CheckBox HorizontalOptions="End" Margin="{OnPlatform Android='300,0,0,0',iOS='280,0,0,0',Default='700,0,0,0'}" x:Name="CheckBox" IsChecked="True"></CheckBox>
+                    <Label Text="Enable Solid Candles" Margin="0,10,0,0" HorizontalOptions="End"></Label>
             </HorizontalStackLayout>
             </VerticalStackLayout>
         </HorizontalStackLayout>
