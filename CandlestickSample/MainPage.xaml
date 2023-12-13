@@ -4,50 +4,45 @@
              x:Class="CandlestickSample.MainPage"
              xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
              xmlns:local="clr-namespace:CandlestickSample"
-             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons">
-    <Grid RowSpacing="10" Background="#7a2048">
+             >
+    <Grid RowSpacing="10">
         <Grid.BindingContext>
             <local:StockPriceViewModel></local:StockPriceViewModel>
         </Grid.BindingContext>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2.5*"></RowDefinition>
             <RowDefinition Height="8*"></RowDefinition>
         </Grid.RowDefinitions>
-        <BoxView HeightRequest="{OnPlatform Android='65',Default='90'}" Grid.Row="0" WidthRequest="10" Background="#ffea04" HorizontalOptions="Start" Margin="10,0,0,0"></BoxView>
-        <VerticalStackLayout>
-            <Label Text="CandleStick Chart" FontSize="Large" Margin="30,10,0,0" TextColor="White"></Label>
-            <Label Text="Analysis of Tesla(TSLA) Stock Prices" Margin="30,10,0,0" FontSize="Caption" TextColor="White"></Label>
-            <HorizontalStackLayout>
-                <buttons:SfSegmentedControl x:Name="segmentedControl" SelectionChanged="segmentedControl_SelectionChanged" SegmentWidth="{OnPlatform Android='40',Default='50'}" 
-                                                Margin="{OnPlatform Android='500,-35,0,0',Default='800,-5,0,0'}" 
-                                                SegmentHeight="{OnPlatform Android='30',Default='30'}" BackgroundColor="#7a2048"
-                                                StrokeThickness="3"
-                                                Stroke="White">
-                    <buttons:SfSegmentedControl.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Day</x:String>
-                            <x:String>Week</x:String>
-                            <x:String>Month</x:String>
-                            <x:String>Year</x:String>
-                        </x:Array>
-                    </buttons:SfSegmentedControl.ItemsSource>
-                    <buttons:SfSegmentedControl.TextStyle>
-                        <buttons:SegmentTextStyle TextColor="White" FontAttributes="Bold"></buttons:SegmentTextStyle>
-                    </buttons:SfSegmentedControl.TextStyle>
-                    <buttons:SfSegmentedControl.SelectionIndicatorSettings>
-                        <buttons:SelectionIndicatorSettings SelectionIndicatorPlacement="BottomBorder"></buttons:SelectionIndicatorSettings>
-                    </buttons:SfSegmentedControl.SelectionIndicatorSettings>
-                </buttons:SfSegmentedControl>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <HorizontalStackLayout>
+        <Image Source="tesla.png" WidthRequest="60" HeightRequest="60" Margin="{OnPlatform Android='5,-20,0,0',iOS='5,-22,0,0',Default='5,-80,0,0'}" Grid.Row="0" Grid.Column="0"></Image>
+            <VerticalStackLayout Grid.Row="0" Grid.Column="1">
+                <Label Text="{OnPlatform Android='Tesla,Inc.(TSLA)',Default='TSLA'}" FontSize="Medium" FontAttributes="Bold" Margin="{OnPlatform iOS='0,5,0,0'}"></Label>
+                <Label Text="Analysis of Tesla(TSLA) Stock Prices" FontSize="Default" Margin="{OnPlatform Android='0,15,0,0',Default='0,5,0,0'}"></Label>
+            <HorizontalStackLayout Margin="{OnPlatform Android='0,0,0,0',Default='0,10,0,0'}">
+                    <Button x:Name="Label1" Text="Day" Background="Transparent" TextColor="Black" CornerRadius="5" Clicked="DayRange_Changed"></Button>
+                    <Button x:Name="Label2" Text="Week" Background="Transparent" TextColor="Black" CornerRadius="5" Clicked="WeekRange_Changed"></Button>
+                    <Button x:Name="Label3" Text="Month" Background="Transparent" TextColor="Black" CornerRadius="5" Clicked="MonthRange_Changed"></Button>
+                    <Button x:Name="Label4" Text="Year" Background="Transparent" TextColor="Black" CornerRadius="5" Clicked="YearRange_Changed"></Button>
+                    <CheckBox HorizontalOptions="End" Margin="{OnPlatform Android='300,0,0,0',iOS='280,0,0,0',Default='700,0,0,0'}" x:Name="CheckBox" IsChecked="True"></CheckBox>
+                    <Label Text="Enable Solid Candles" Margin="0,10,0,0" HorizontalOptions="End"></Label>
             </HorizontalStackLayout>
-        </VerticalStackLayout>
-
-        <chart:SfCartesianChart Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,0,15,10" Background="WhiteSmoke">
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+        <chart:SfCartesianChart Grid.Row="1" 
+                                Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,0,15,10" 
+                                Background="White"
+                                >
             <chart:SfCartesianChart.XAxes>
                 <chart:DateTimeAxis x:Name="xAxis"
                                     ShowTrackballLabel="True" 
-                                    AutoScrollingDelta="6"                            
+                                    AutoScrollingDelta="4"                            
                                     AutoScrollingDeltaType="Months"
                                     ShowMajorGridLines="False"
+                                    LabelCreated="xAxis_LabelCreated"
                                     >
                     <chart:DateTimeAxis.Title>
                         <chart:ChartAxisTitle Text="Date"></chart:ChartAxisTitle>
@@ -55,27 +50,34 @@
                 </chart:DateTimeAxis>
             </chart:SfCartesianChart.XAxes>
             <chart:SfCartesianChart.YAxes>
-                <chart:NumericalAxis CrossesAt="{Static x:Double.MaxValue}">
+                <chart:NumericalAxis Minimum="190" Maximum="280" Interval="20" x:Name="yAxis">
                     <chart:NumericalAxis.Title>
                         <chart:ChartAxisTitle Text="Prices"></chart:ChartAxisTitle>
                     </chart:NumericalAxis.Title>
+                    <chart:NumericalAxis.LabelStyle>
+                        <chart:ChartAxisLabelStyle LabelFormat="$0"></chart:ChartAxisLabelStyle>
+                    </chart:NumericalAxis.LabelStyle>
                 </chart:NumericalAxis>
             </chart:SfCartesianChart.YAxes>
-            <chart:CandleSeries ItemsSource="{Binding StockPrices}"
+            <chart:CandleSeries x:Name="series"
+                                ItemsSource="{Binding StockPrices}"
                                 XBindingPath="Date"
                                 Open="Open"
                                 High="High"
                                 Low="Low"
                                 Close="Close"
-                                ShowTrackballLabel="True"
-                                ></chart:CandleSeries>
+                                BullishFill="Green"
+                                BearishFill="red"
+                                ShowTrackballLabel="True"                               
+                                EnableSolidCandle="{Binding Source={x:Reference CheckBox},Path=IsChecked}"
+                                />
             <chart:SfCartesianChart.TrackballBehavior>
                 <chart:ChartTrackballBehavior></chart:ChartTrackballBehavior>
-            </chart:SfCartesianChart.TrackballBehavior>
+        </chart:SfCartesianChart.TrackballBehavior>
             <chart:SfCartesianChart.ZoomPanBehavior>
-                <chart:ChartZoomPanBehavior EnablePanning="True" ZoomMode="X" EnableDoubleTap="False"></chart:ChartZoomPanBehavior>
+                <chart:ChartZoomPanBehavior EnablePanning="True" ZoomMode="X" EnableDoubleTap="False" EnablePinchZooming="True" EnableSelectionZooming="True"></chart:ChartZoomPanBehavior>
             </chart:SfCartesianChart.ZoomPanBehavior>
         </chart:SfCartesianChart>
+            
     </Grid>
-
 </ContentPage>
